@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		192E0A7919E1E9C200DC2119 /* Z80.c in Sources */ = {isa = PBXBuildFile; fileRef = 192E0A7719E1E9C200DC2119 /* Z80.c */; };
 		1984589C19E1DDDE00BA1362 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1984589B19E1DDDE00BA1362 /* main.m */; };
 		1984589F19E1DDDE00BA1362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1984589E19E1DDDE00BA1362 /* AppDelegate.m */; };
 		198458A219E1DDDE00BA1362 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198458A119E1DDDE00BA1362 /* ViewController.m */; };
@@ -27,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		192E0A7719E1E9C200DC2119 /* Z80.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Z80.c; sourceTree = "<group>"; };
+		192E0A7819E1E9C200DC2119 /* Z80.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Z80.h; sourceTree = "<group>"; };
 		1984589619E1DDDE00BA1362 /* RMBBoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMBBoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1984589A19E1DDDE00BA1362 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1984589B19E1DDDE00BA1362 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -81,6 +84,8 @@
 		1984589819E1DDDE00BA1362 /* RMBBoy */ = {
 			isa = PBXGroup;
 			children = (
+				192E0A7719E1E9C200DC2119 /* Z80.c */,
+				192E0A7819E1E9C200DC2119 /* Z80.h */,
 				1984589D19E1DDDE00BA1362 /* AppDelegate.h */,
 				1984589E19E1DDDE00BA1362 /* AppDelegate.m */,
 				198458A019E1DDDE00BA1362 /* ViewController.h */,
@@ -219,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				192E0A7919E1E9C200DC2119 /* Z80.c in Sources */,
 				198458A219E1DDDE00BA1362 /* ViewController.m in Sources */,
 				1984589F19E1DDDE00BA1362 /* AppDelegate.m in Sources */,
 				1984589C19E1DDDE00BA1362 /* main.m in Sources */,
@@ -414,6 +420,7 @@
 				198458BB19E1DDDF00BA1362 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		198458BC19E1DDDF00BA1362 /* Build configuration list for PBXNativeTarget "RMBBoyTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +429,7 @@
 				198458BE19E1DDDF00BA1362 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

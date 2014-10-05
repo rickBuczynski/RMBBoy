@@ -7,22 +7,24 @@
 //
 
 #include "Z80.h"
+#include "MMU.h"
 
 typedef struct Clock {
     // TODO: should these be ints or are they 8bit/16bit?
-    int32_t m;
-    int32_t t;
+    int m;
+    int t;
 } Clock;
 
 typedef struct Registers {
-    int32_t a,b,c,d,e,h,l,f;
-    int32_t pc,sp;
-    int32_t m,t;
+    int a,b,c,d,e,h,l,f;
+    int pc,sp;
+    int m,t;
 } Registers;
 
 typedef struct Z80 {
     Registers regs;
     Clock clock;
+    
 } Z80;
 
 void Z80_reset(Z80 *z80)
@@ -69,6 +71,14 @@ void Z80_printRegisters(Z80 *z80)
 
 #pragma mark - instructions
 
+void Z80_foo(Z80 *z80) {
+    printf("foo\n");
+}
+
+void Z80_baz(Z80 *z80) {
+    printf("baz\n");
+}
+
 void Z80_ADDr_e(Z80 *z80) {
     z80->regs.a += z80->regs.e;
     z80->regs.f = 0;
@@ -84,7 +94,28 @@ void Z80_ADDr_e(Z80 *z80) {
     
 }
 
-void Z80_run()
+typedef void (*instr_ptr_t)(Z80 *);
+
+instr_ptr_t instrMap[] =
+{
+    Z80_foo,
+    Z80_baz,
+    Z80_ADDr_e,
+};
+
+void Z80_run(Z80 *z80)
+{
+    int i = 0;
+    while(i++ < 4) {
+        int op = MMU_rb(z80->regs.pc++);              // Fetch instruction
+        instrMap[op](z80);                            // Dispatch
+        z80->regs.pc &= 65535;                        // Mask PC to 16 bits
+        z80->clock.m += z80->regs.m;                  // Add time to CPU clock
+        z80->clock.t += z80->regs.t;
+    }
+}
+
+void Z80_doStuff()
 {
     Z80 z80;
     
@@ -93,5 +124,9 @@ void Z80_run()
     Z80_printRegisters(&z80);
     Z80_ADDr_e(&z80);
     Z80_printRegisters(&z80);
+    
+    Z80_run(&z80);
+    
+    
     
 }

@@ -11,6 +11,6 @@
 
 #include <stdio.h>
 
-void Z80_run();
+void Z80_doStuff();
 
 #endif /* defined(__RMBBoy__Z80__) */

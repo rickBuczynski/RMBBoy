@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		192E0A7919E1E9C200DC2119 /* Z80.c in Sources */ = {isa = PBXBuildFile; fileRef = 192E0A7719E1E9C200DC2119 /* Z80.c */; };
+		192E0A7D19E1F3D900DC2119 /* MMU.c in Sources */ = {isa = PBXBuildFile; fileRef = 192E0A7B19E1F3D900DC2119 /* MMU.c */; };
 		1984589C19E1DDDE00BA1362 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1984589B19E1DDDE00BA1362 /* main.m */; };
 		1984589F19E1DDDE00BA1362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1984589E19E1DDDE00BA1362 /* AppDelegate.m */; };
 		198458A219E1DDDE00BA1362 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198458A119E1DDDE00BA1362 /* ViewController.m */; };
@@ -30,6 +31,8 @@
 /* Begin PBXFileReference section */
 		192E0A7719E1E9C200DC2119 /* Z80.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Z80.c; sourceTree = "<group>"; };
 		192E0A7819E1E9C200DC2119 /* Z80.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Z80.h; sourceTree = "<group>"; };
+		192E0A7B19E1F3D900DC2119 /* MMU.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MMU.c; sourceTree = "<group>"; };
+		192E0A7C19E1F3D900DC2119 /* MMU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMU.h; sourceTree = "<group>"; };
 		1984589619E1DDDE00BA1362 /* RMBBoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMBBoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1984589A19E1DDDE00BA1362 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1984589B19E1DDDE00BA1362 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -63,6 +66,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		192E0A7A19E1F3C900DC2119 /* Emulator */ = {
+			isa = PBXGroup;
+			children = (
+				192E0A7719E1E9C200DC2119 /* Z80.c */,
+				192E0A7819E1E9C200DC2119 /* Z80.h */,
+				192E0A7B19E1F3D900DC2119 /* MMU.c */,
+				192E0A7C19E1F3D900DC2119 /* MMU.h */,
+			);
+			name = Emulator;
+			sourceTree = "<group>";
+		};
 		1984588D19E1DDDE00BA1362 = {
 			isa = PBXGroup;
 			children = (
@@ -84,8 +98,7 @@
 		1984589819E1DDDE00BA1362 /* RMBBoy */ = {
 			isa = PBXGroup;
 			children = (
-				192E0A7719E1E9C200DC2119 /* Z80.c */,
-				192E0A7819E1E9C200DC2119 /* Z80.h */,
+				192E0A7A19E1F3C900DC2119 /* Emulator */,
 				1984589D19E1DDDE00BA1362 /* AppDelegate.h */,
 				1984589E19E1DDDE00BA1362 /* AppDelegate.m */,
 				198458A019E1DDDE00BA1362 /* ViewController.h */,
@@ -226,6 +239,7 @@
 			files = (
 				192E0A7919E1E9C200DC2119 /* Z80.c in Sources */,
 				198458A219E1DDDE00BA1362 /* ViewController.m in Sources */,
+				192E0A7D19E1F3D900DC2119 /* MMU.c in Sources */,
 				1984589F19E1DDDE00BA1362 /* AppDelegate.m in Sources */,
 				1984589C19E1DDDE00BA1362 /* main.m in Sources */,
 			);

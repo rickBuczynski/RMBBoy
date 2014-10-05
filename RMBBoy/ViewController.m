@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    Z80_run();
+    Z80_doStuff();
 }
 
 - (void)didReceiveMemoryWarning {

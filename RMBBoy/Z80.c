@@ -15,8 +15,9 @@ typedef struct Clock {
 } Clock;
 
 typedef struct Registers {
-    int8_t a,b,c,d,e,h,l,f;
-    int16_t pc,sp;
+    int32_t a,b,c,d,e,h,l,f;
+    int32_t pc,sp;
+    int32_t m,t;
 } Registers;
 
 typedef struct Z80 {
@@ -24,7 +25,7 @@ typedef struct Z80 {
     Clock clock;
 } Z80;
 
-void Z80_init(Z80 *z80)
+void Z80_reset(Z80 *z80)
 {
     z80->regs.a = 0;
     z80->regs.b = 0;
@@ -37,6 +38,9 @@ void Z80_init(Z80 *z80)
     
     z80->regs.pc = 0;
     z80->regs.sp = 0;
+    
+    z80->regs.m = 0;
+    z80->regs.t = 0;
     
     z80->clock.m = 0;
     z80->clock.t = 0;
@@ -56,8 +60,28 @@ void Z80_printRegisters(Z80 *z80)
     printf("z80->regs.pc = %d\n",z80->regs.pc);
     printf("z80->regs.sp = %d\n",z80->regs.sp);
     
+    printf("z80->regs.m = %d\n",z80->regs.m);
+    printf("z80->regs.t = %d\n",z80->regs.t);
+    
     printf("z80->clock.m = %d\n",z80->clock.m);
     printf("z80->clock.t = %d\n",z80->clock.t);
+}
+
+#pragma mark - instructions
+
+void Z80_ADDr_e(Z80 *z80) {
+    z80->regs.a += z80->regs.e;
+    z80->regs.f = 0;
+    if (!(z80->regs.a & 255)) {
+        z80->regs.f |= 0x80;
+    }
+    if (z80->regs.a > 255) {
+        z80->regs.f |= 0x10;
+    }
+    z80->regs.a &= 255;
+    z80->regs.m = 1;
+    z80->regs.t = 4;
+    
 }
 
 void Z80_run()
@@ -65,7 +89,9 @@ void Z80_run()
     Z80 z80;
     
     Z80_printRegisters(&z80);
-    Z80_init(&z80);
+    Z80_reset(&z80);
+    Z80_printRegisters(&z80);
+    Z80_ADDr_e(&z80);
     Z80_printRegisters(&z80);
     
 }

@@ -20,30 +20,25 @@
     // Do any additional setup after loading the view, typically from a nib.
 
     self.gameView.contentMode = UIViewContentModeScaleAspectFit;
-    UIImage *gameImage = [self imageWidth:15 height:17];
-    self.gameView.image = gameImage;
     
-    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"display gameboy screen" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        NSArray *pixels = note.userInfo[@"pixels"];
+        UIImage *gameImage = [self imageWithPixels:pixels];
+        self.gameView.image = gameImage;
+    }];
     
     Z80_doStuff();
-    
 }
 
--(UIImage *)imageWidth:(NSUInteger)width height:(NSUInteger)height {
-    /*
-     Assuming pixel color values are 8 bit unsigned
-     
-     You need to create an array that is in the format BGRA (blue,green,red,alpha).
-     You can achieve this by implementing a for-loop that sets the values at each index.
-     I have not included a for-loop in this example because it depends on how the values are stored in your input 2D array.
-     You can set the alpha value to 255.
-     */
-    unsigned char pixelData[width * height];
-    for (int i=0; i<width*height; i++) {
-        pixelData[i]=i;
+-(UIImage *)imageWithPixels:(NSArray *)pixels
+{
+    int width = 160;
+    int height = 144;
+
+    unsigned char pixelData[width*height];
+    for (int i = 0; i < width*height; i++) {
+        pixelData[i] = [pixels[i] integerValue];
     }
-    
-    // This is where the for-loop would be
     
     void *baseAddress = &pixelData;
     

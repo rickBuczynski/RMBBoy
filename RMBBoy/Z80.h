@@ -7,6 +7,7 @@
 //
 
 #import "MMU.h"
+#import "GPU.h"
 
 typedef struct Clock {
     int m;
@@ -32,8 +33,10 @@ typedef struct Z80 {
     Registers regs;
     RegisterSaves regSaves;
     Clock clock;
-    MMU* mmu;
     Flags flags;
+    
+    MMU* mmu;
+    GPU* gpu;
 } Z80;
 
 void Z80_doStuff();

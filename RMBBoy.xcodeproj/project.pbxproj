@@ -10,6 +10,7 @@
 		192E0A7919E1E9C200DC2119 /* Z80.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E0A7719E1E9C200DC2119 /* Z80.m */; };
 		192E0A7D19E1F3D900DC2119 /* MMU.m in Sources */ = {isa = PBXBuildFile; fileRef = 192E0A7B19E1F3D900DC2119 /* MMU.m */; };
 		192E0A8719E223B500DC2119 /* rom1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 192E0A8519E223B500DC2119 /* rom1.txt */; };
+		196E6CCC19E3433800906C42 /* GPU.m in Sources */ = {isa = PBXBuildFile; fileRef = 196E6CCB19E3433800906C42 /* GPU.m */; };
 		1984589C19E1DDDE00BA1362 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1984589B19E1DDDE00BA1362 /* main.m */; };
 		1984589F19E1DDDE00BA1362 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1984589E19E1DDDE00BA1362 /* AppDelegate.m */; };
 		198458A219E1DDDE00BA1362 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 198458A119E1DDDE00BA1362 /* ViewController.m */; };
@@ -36,6 +37,8 @@
 		192E0A7C19E1F3D900DC2119 /* MMU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMU.h; sourceTree = "<group>"; };
 		192E0A8519E223B500DC2119 /* rom1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rom1.txt; sourceTree = "<group>"; };
 		192E0A8919E2289C00DC2119 /* Z80_Instructions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Z80_Instructions.h; sourceTree = "<group>"; };
+		196E6CCA19E3432900906C42 /* GPU.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPU.h; sourceTree = "<group>"; };
+		196E6CCB19E3433800906C42 /* GPU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPU.m; sourceTree = "<group>"; };
 		1984589619E1DDDE00BA1362 /* RMBBoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMBBoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1984589A19E1DDDE00BA1362 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1984589B19E1DDDE00BA1362 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -75,6 +78,8 @@
 				192E0A8919E2289C00DC2119 /* Z80_Instructions.h */,
 				192E0A7719E1E9C200DC2119 /* Z80.m */,
 				192E0A7819E1E9C200DC2119 /* Z80.h */,
+				196E6CCA19E3432900906C42 /* GPU.h */,
+				196E6CCB19E3433800906C42 /* GPU.m */,
 				192E0A7B19E1F3D900DC2119 /* MMU.m */,
 				192E0A7C19E1F3D900DC2119 /* MMU.h */,
 				192E0A8519E223B500DC2119 /* rom1.txt */,
@@ -243,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				196E6CCC19E3433800906C42 /* GPU.m in Sources */,
 				192E0A7919E1E9C200DC2119 /* Z80.m in Sources */,
 				198458A219E1DDDE00BA1362 /* ViewController.m in Sources */,
 				192E0A7D19E1F3D900DC2119 /* MMU.m in Sources */,

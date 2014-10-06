@@ -48,12 +48,18 @@ void Z80_reset(Z80 *z80)
     
     z80->mmu = malloc(sizeof(MMU));
     MMU_reset(z80->mmu);
+    
+    z80->gpu = malloc(sizeof(GPU));
+    GPU_reset(z80->gpu);
 }
 
 void Z80_free(Z80 *z80)
 {
     MMU_free(z80->mmu);
     free(z80->mmu);
+    
+    GPU_free(z80->gpu);
+    free(z80->gpu);
 }
 
 void Z80_printRegisters(Z80 *z80)
@@ -93,7 +99,8 @@ void Z80_run(Z80 *z80)
         
         z80->regs.pc++;
     }
-     
+    
+    Screen_display(z80->gpu->screen);
     
     /*
     int val = MMU_rb(&mmu,0x0100,0x0100);                // Fetch instruction

@@ -11,10 +11,23 @@
 
 #include <stdio.h>
 
-int MMU_rb(int addr);
-int MMU_rw(int addr);
+#include "Z80.h"
 
-void MMU_wb(int addr, int val);
-void MMU_ww(int addr, int val);
+typedef struct MMU {
+    int inBios;
+    int *rom;
+    int *wram;
+    int *eram;
+    int *zram;
+} MMU;
+
+void MMU_reset(MMU *mmu);
+void MMU_free(MMU *mmu);
+
+int MMU_rb(MMU *mmu, int addr, int programCounter);
+int MMU_rw(MMU *mmu, int addr, int programCounter);
+
+void MMU_wb(MMU *mmu, int addr, int val);
+void MMU_ww(MMU *mmu, int addr, int val);
 
 #endif /* defined(__RMBBoy__MMU__) */

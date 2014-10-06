@@ -105,14 +105,21 @@ instr_ptr_t instrMap[] =
 
 void Z80_run(Z80 *z80)
 {
+    MMU mmu;
+    MMU_reset(&mmu);
+    
     int i = 0;
     while(i++ < 4) {
-        int op = MMU_rb(z80->regs.pc++);              // Fetch instruction
-        instrMap[op](z80);                            // Dispatch
+        int op = MMU_rb(&mmu,z80->regs.pc,z80->regs.pc);              // Fetch instruction
+        printf("%x\n",op);//instrMap[op](z80);                            // Dispatch
         z80->regs.pc &= 65535;                        // Mask PC to 16 bits
         z80->clock.m += z80->regs.m;                  // Add time to CPU clock
         z80->clock.t += z80->regs.t;
+        
+        z80->regs.pc++;
     }
+    
+    MMU_free(&mmu);
 }
 
 void Z80_doStuff()

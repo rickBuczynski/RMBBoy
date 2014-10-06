@@ -12,7 +12,6 @@
 #include "MMU.h"
 
 typedef struct Clock {
-    // TODO: should these be ints or are they 8bit/16bit?
     int m;
     int t;
 } Clock;
@@ -109,17 +108,29 @@ void Z80_run(Z80 *z80)
 {
     MMU mmu;
     MMU_reset(&mmu);
+    MMU_loadRom(&mmu);
     
     int i = 0;
+    /*
     while(i++ < 4) {
-        int op = MMU_rb(&mmu,z80->regs.pc,z80->regs.pc);              // Fetch instruction
-        NSLog(@"%x\n",op);//instrMap[op](z80);                            // Dispatch
-        z80->regs.pc &= 65535;                        // Mask PC to 16 bits
-        z80->clock.m += z80->regs.m;                  // Add time to CPU clock
+        int op = MMU_rb(&mmu,z80->regs.pc,z80->regs.pc);                // Fetch instruction
+        instrMap[op](z80);                                              // Dispatch
+        z80->regs.pc &= 65535;                                          // Mask PC to 16 bits
+        z80->clock.m += z80->regs.m;                                    // Add time to CPU clock
         z80->clock.t += z80->regs.t;
         
         z80->regs.pc++;
     }
+     */
+    
+    /*
+    int val = MMU_rb(&mmu,0x0100,0x0100);                // Fetch instruction
+    while(i < 4) {
+        val = MMU_rb(&mmu,i,0x0100);                // Fetch instruction
+        NSLog(@"%c",val);
+        i++;
+    }
+     */
     
     MMU_free(&mmu);
 }
@@ -128,12 +139,13 @@ void Z80_doStuff()
 {
     Z80 z80;
     
-    Z80_printRegisters(&z80);
-    Z80_reset(&z80);
-    Z80_printRegisters(&z80);
-    Z80_ADDr_e(&z80);
-    Z80_printRegisters(&z80);
+    //Z80_printRegisters(&z80);
+    //Z80_reset(&z80);
+    //Z80_printRegisters(&z80);
+    //Z80_ADDr_e(&z80);
+    //Z80_printRegisters(&z80);
     
+    Z80_reset(&z80);
     Z80_run(&z80);
     
     

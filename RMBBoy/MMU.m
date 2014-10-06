@@ -202,3 +202,10 @@ void MMU_ww(MMU *mmu, int addr, int val)
     MMU_wb(mmu, addr+1, val>>8);
 }
 
+void MMU_loadRom(MMU *mmu)
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"rom1" ofType:@"txt"];
+    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    NSLog(@"%@",content);
+    mmu->rom = [content cStringUsingEncoding:[NSString defaultCStringEncoding]];
+}

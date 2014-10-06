@@ -15,7 +15,7 @@
 
 typedef struct MMU {
     int inBios;
-    int *rom;
+    const char *rom;
     int *wram;
     int *eram;
     int *zram;
@@ -29,5 +29,7 @@ int MMU_rw(MMU *mmu, int addr, int programCounter);
 
 void MMU_wb(MMU *mmu, int addr, int val);
 void MMU_ww(MMU *mmu, int addr, int val);
+
+void MMU_loadRom(MMU *mmu);
 
 #endif /* defined(__RMBBoy__MMU__) */

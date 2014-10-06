@@ -6,13 +6,6 @@
 //  Copyright (c) 2014 Rick Buczynski. All rights reserved.
 //
 
-#ifndef __RMBBoy__MMU__
-#define __RMBBoy__MMU__
-
-#include <stdio.h>
-
-#include "Z80.h"
-
 typedef struct MMU {
     int inBios;
     const char *rom;
@@ -32,4 +25,3 @@ void MMU_ww(MMU *mmu, int addr, int val);
 
 void MMU_loadRom(MMU *mmu);
 
-#endif /* defined(__RMBBoy__MMU__) */

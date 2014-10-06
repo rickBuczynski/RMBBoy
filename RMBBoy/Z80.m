@@ -8,25 +8,9 @@
 
 @import Foundation;
 
-#include "Z80.h"
-#include "MMU.h"
-
-typedef struct Clock {
-    int m;
-    int t;
-} Clock;
-
-typedef struct Registers {
-    int a,b,c,d,e,h,l,f;
-    int pc,sp;
-    int m,t;
-} Registers;
-
-typedef struct Z80 {
-    Registers regs;
-    Clock clock;
-    
-} Z80;
+#import "Z80.h"
+#import "MMU.h"
+#import "Z80_Instructions.h"
 
 void Z80_reset(Z80 *z80)
 {
@@ -70,39 +54,7 @@ void Z80_printRegisters(Z80 *z80)
     NSLog(@"z80->clock.t = %d\n",z80->clock.t);
 }
 
-#pragma mark - instructions
 
-void Z80_foo(Z80 *z80) {
-    NSLog(@"foo\n");
-}
-
-void Z80_baz(Z80 *z80) {
-    NSLog(@"baz\n");
-}
-
-void Z80_ADDr_e(Z80 *z80) {
-    z80->regs.a += z80->regs.e;
-    z80->regs.f = 0;
-    if (!(z80->regs.a & 255)) {
-        z80->regs.f |= 0x80;
-    }
-    if (z80->regs.a > 255) {
-        z80->regs.f |= 0x10;
-    }
-    z80->regs.a &= 255;
-    z80->regs.m = 1;
-    z80->regs.t = 4;
-    
-}
-
-typedef void (*instr_ptr_t)(Z80 *);
-
-instr_ptr_t instrMap[] =
-{
-    Z80_foo,
-    Z80_baz,
-    Z80_ADDr_e,
-};
 
 void Z80_run(Z80 *z80)
 {
@@ -111,7 +63,7 @@ void Z80_run(Z80 *z80)
     MMU_loadRom(&mmu);
     
     int i = 0;
-    /*
+    
     while(i++ < 4) {
         int op = MMU_rb(&mmu,z80->regs.pc,z80->regs.pc);                // Fetch instruction
         instrMap[op](z80);                                              // Dispatch
@@ -121,7 +73,7 @@ void Z80_run(Z80 *z80)
         
         z80->regs.pc++;
     }
-     */
+     
     
     /*
     int val = MMU_rb(&mmu,0x0100,0x0100);                // Fetch instruction

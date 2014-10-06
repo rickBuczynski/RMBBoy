@@ -6,11 +6,21 @@
 //  Copyright (c) 2014 Rick Buczynski. All rights reserved.
 //
 
-#ifndef __RMBBoy__Z80__
-#define __RMBBoy__Z80__
+typedef struct Clock {
+    int m;
+    int t;
+} Clock;
 
-#include <stdio.h>
+typedef struct Registers {
+    int a,b,c,d,e,h,l,f;
+    int pc,sp;
+    int m,t;
+} Registers;
+
+typedef struct Z80 {
+    Registers regs;
+    Clock clock;
+    
+} Z80;
 
 void Z80_doStuff();
-
-#endif /* defined(__RMBBoy__Z80__) */

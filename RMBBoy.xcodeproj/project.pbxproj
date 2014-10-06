@@ -35,6 +35,7 @@
 		192E0A7B19E1F3D900DC2119 /* MMU.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMU.m; sourceTree = "<group>"; };
 		192E0A7C19E1F3D900DC2119 /* MMU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMU.h; sourceTree = "<group>"; };
 		192E0A8519E223B500DC2119 /* rom1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rom1.txt; sourceTree = "<group>"; };
+		192E0A8919E2289C00DC2119 /* Z80_Instructions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Z80_Instructions.h; sourceTree = "<group>"; };
 		1984589619E1DDDE00BA1362 /* RMBBoy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RMBBoy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1984589A19E1DDDE00BA1362 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1984589B19E1DDDE00BA1362 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -71,6 +72,7 @@
 		192E0A7A19E1F3C900DC2119 /* Emulator */ = {
 			isa = PBXGroup;
 			children = (
+				192E0A8919E2289C00DC2119 /* Z80_Instructions.h */,
 				192E0A7719E1E9C200DC2119 /* Z80.m */,
 				192E0A7819E1E9C200DC2119 /* Z80.h */,
 				192E0A7B19E1F3D900DC2119 /* MMU.m */,

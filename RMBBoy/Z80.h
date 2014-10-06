@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Rick Buczynski. All rights reserved.
 //
 
+#import "MMU.h"
+
 typedef struct Clock {
     int m;
     int t;
@@ -14,13 +16,24 @@ typedef struct Clock {
 typedef struct Registers {
     int a,b,c,d,e,h,l,f;
     int pc,sp;
+    int ime;
     int m,t;
 } Registers;
 
+typedef struct RegisterSaves {
+    int a,b,c,d,e,h,l,f;
+} RegisterSaves;
+
+typedef struct Flags {
+    int stop, halt;
+} Flags;
+
 typedef struct Z80 {
     Registers regs;
+    RegisterSaves regSaves;
     Clock clock;
-    
+    MMU* mmu;
+    Flags flags;
 } Z80;
 
 void Z80_doStuff();

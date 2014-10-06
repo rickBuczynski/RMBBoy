@@ -26,11 +26,25 @@ void Z80_reset(Z80 *z80)
     z80->regs.pc = 0;
     z80->regs.sp = 0;
     
+    z80->regs.ime = 0;
+    
     z80->regs.m = 0;
     z80->regs.t = 0;
     
+    z80->regSaves.a = 0;
+    z80->regSaves.b = 0;
+    z80->regSaves.c = 0;
+    z80->regSaves.d = 0;
+    z80->regSaves.e = 0;
+    z80->regSaves.h = 0;
+    z80->regSaves.l = 0;
+    z80->regSaves.f = 0;
+    
     z80->clock.m = 0;
     z80->clock.t = 0;
+    
+    z80->flags.stop = 0;
+    z80->flags.halt = 0;
 }
 
 void Z80_printRegisters(Z80 *z80)

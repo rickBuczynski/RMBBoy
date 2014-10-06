@@ -45,6 +45,15 @@ void Z80_reset(Z80 *z80)
     
     z80->flags.stop = 0;
     z80->flags.halt = 0;
+    
+    z80->mmu = malloc(sizeof(MMU));
+    MMU_reset(z80->mmu);
+}
+
+void Z80_free(Z80 *z80)
+{
+    MMU_free(z80->mmu);
+    free(z80->mmu);
 }
 
 void Z80_printRegisters(Z80 *z80)
@@ -72,14 +81,11 @@ void Z80_printRegisters(Z80 *z80)
 
 void Z80_run(Z80 *z80)
 {
-    MMU mmu;
-    MMU_reset(&mmu);
-    MMU_loadRom(&mmu);
-    
+
     int i = 0;
     
-    while(i++ < 4) {
-        int op = MMU_rb(&mmu,z80->regs.pc,z80->regs.pc);                // Fetch instruction
+    while(i++ < 5) {
+        int op = MMU_rb(z80->mmu,z80->regs.pc,z80->regs.pc);                // Fetch instruction
         instrMap[op](z80);                                              // Dispatch
         z80->regs.pc &= 65535;                                          // Mask PC to 16 bits
         z80->clock.m += z80->regs.m;                                    // Add time to CPU clock
@@ -98,7 +104,6 @@ void Z80_run(Z80 *z80)
     }
      */
     
-    MMU_free(&mmu);
 }
 
 void Z80_doStuff()
@@ -113,7 +118,7 @@ void Z80_doStuff()
     
     Z80_reset(&z80);
     Z80_run(&z80);
-    
+    Z80_free(&z80);
     
     
 }

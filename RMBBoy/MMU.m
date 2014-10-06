@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Rick Buczynski. All rights reserved.
 //
 
+@import Foundation;
+
 #include <stdlib.h>
 
 #include "MMU.h"

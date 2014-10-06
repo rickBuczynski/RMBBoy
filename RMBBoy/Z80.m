@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Rick Buczynski. All rights reserved.
 //
 
+@import Foundation;
+
 #include "Z80.h"
 #include "MMU.h"
 
@@ -50,33 +52,33 @@ void Z80_reset(Z80 *z80)
 
 void Z80_printRegisters(Z80 *z80)
 {
-    printf("z80->regs.a = %d\n",z80->regs.a);
-    printf("z80->regs.b = %d\n",z80->regs.b);
-    printf("z80->regs.c = %d\n",z80->regs.c);
-    printf("z80->regs.d = %d\n",z80->regs.d);
-    printf("z80->regs.e = %d\n",z80->regs.e);
-    printf("z80->regs.h = %d\n",z80->regs.h);
-    printf("z80->regs.l = %d\n",z80->regs.l);
-    printf("z80->regs.f = %d\n",z80->regs.f);
+    NSLog(@"z80->regs.a = %d\n",z80->regs.a);
+    NSLog(@"z80->regs.b = %d\n",z80->regs.b);
+    NSLog(@"z80->regs.c = %d\n",z80->regs.c);
+    NSLog(@"z80->regs.d = %d\n",z80->regs.d);
+    NSLog(@"z80->regs.e = %d\n",z80->regs.e);
+    NSLog(@"z80->regs.h = %d\n",z80->regs.h);
+    NSLog(@"z80->regs.l = %d\n",z80->regs.l);
+    NSLog(@"z80->regs.f = %d\n",z80->regs.f);
     
-    printf("z80->regs.pc = %d\n",z80->regs.pc);
-    printf("z80->regs.sp = %d\n",z80->regs.sp);
+    NSLog(@"z80->regs.pc = %d\n",z80->regs.pc);
+    NSLog(@"z80->regs.sp = %d\n",z80->regs.sp);
     
-    printf("z80->regs.m = %d\n",z80->regs.m);
-    printf("z80->regs.t = %d\n",z80->regs.t);
+    NSLog(@"z80->regs.m = %d\n",z80->regs.m);
+    NSLog(@"z80->regs.t = %d\n",z80->regs.t);
     
-    printf("z80->clock.m = %d\n",z80->clock.m);
-    printf("z80->clock.t = %d\n",z80->clock.t);
+    NSLog(@"z80->clock.m = %d\n",z80->clock.m);
+    NSLog(@"z80->clock.t = %d\n",z80->clock.t);
 }
 
 #pragma mark - instructions
 
 void Z80_foo(Z80 *z80) {
-    printf("foo\n");
+    NSLog(@"foo\n");
 }
 
 void Z80_baz(Z80 *z80) {
-    printf("baz\n");
+    NSLog(@"baz\n");
 }
 
 void Z80_ADDr_e(Z80 *z80) {
@@ -111,7 +113,7 @@ void Z80_run(Z80 *z80)
     int i = 0;
     while(i++ < 4) {
         int op = MMU_rb(&mmu,z80->regs.pc,z80->regs.pc);              // Fetch instruction
-        printf("%x\n",op);//instrMap[op](z80);                            // Dispatch
+        NSLog(@"%x\n",op);//instrMap[op](z80);                            // Dispatch
         z80->regs.pc &= 65535;                        // Mask PC to 16 bits
         z80->clock.m += z80->regs.m;                  // Add time to CPU clock
         z80->clock.t += z80->regs.t;

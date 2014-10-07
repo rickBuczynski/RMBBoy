@@ -98,6 +98,8 @@ void Z80_run(Z80 *z80)
         z80->clock.t += z80->regs.t;
         
         z80->regs.pc++;
+        
+        GPU_step(z80->gpu, z80->regs.t);
     }
     
     Screen_display(z80->gpu->screen);

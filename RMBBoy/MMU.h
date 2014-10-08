@@ -6,12 +6,22 @@
 //  Copyright (c) 2014 Rick Buczynski. All rights reserved.
 //
 
+#import "GPU.h"
+
+typedef struct GPURef {
+    int *vram;
+    int ***tileset;
+} GPURef;
+
 typedef struct MMU {
     int inBios;
     const char *rom;
     int *wram;
     int *eram;
     int *zram;
+    
+    // GPU is memory mapped so MMU needs a reference to it
+    GPU *gpu;
 } MMU;
 
 void MMU_reset(MMU *mmu);

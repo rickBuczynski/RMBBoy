@@ -51,6 +51,8 @@ void Z80_reset(Z80 *z80)
     
     z80->gpu = malloc(sizeof(GPU));
     GPU_reset(z80->gpu);
+    
+    z80->mmu->gpu = z80->gpu;
 }
 
 void Z80_free(Z80 *z80)

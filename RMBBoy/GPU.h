@@ -9,19 +9,30 @@
 typedef struct Screen {
     int width;
     int height;
-    int* data;
+    int *data;
 } Screen;
 
 void Screen_reset(Screen *screen);
 void Screen_free(Screen *screen);
 void Screen_display(Screen *screen);
 
+typedef struct TileSet {
+    int ***tiles;
+} TileSet;
+
+void TileSet_update(TileSet *tileSet, int *vram, int addr, int val);
+
 typedef struct GPU {
-    Screen *screen;
     int mode, modeClock, line;
+    
+    Screen *screen;
+    TileSet *tileSet;
+
+    int *vram;
 } GPU;
 
 void GPU_reset(GPU *gpu);
 void GPU_free(GPU *gpu);
 void GPU_renderScan(GPU *gpu);
 void GPU_step(GPU *gpu, int cpuCycleCount);
+

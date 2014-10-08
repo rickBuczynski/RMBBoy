@@ -10,8 +10,8 @@
 
 #include <stdlib.h>
 
-#include "MMU.h"
-
+#import "MMU.h"
+#import "GPU.h"
 
 int MMU_bios[] = {
     0x31, 0xFE, 0xFF, 0xAF, 0x21, 0xFF, 0x9F, 0x32, 0xCB, 0x7C, 0x20, 0xFB, 0x21, 0x26, 0xFF, 0x0E,
@@ -81,7 +81,7 @@ int MMU_rb(MMU *mmu, int addr, int programCounter)
         // Graphics: VRAM (8k)
         case 0x8000:
         case 0x9000:
-            return 0; // TODO: add gpu ram
+            return mmu->gpu->vram[addr & 0x1FFF];
          
         // External RAM (8k)
         case 0xA000:
@@ -153,8 +153,8 @@ void MMU_wb(MMU *mmu, int addr, int val)
             
         // VRAM
         case 0x8000: case 0x9000:
-            //GPU._vram[addr&0x1FFF] = val; TODO
-            //GPU.updatetile(addr&0x1FFF, val); TODO
+            mmu->gpu->vram[addr&0x1FFF] = val;
+            TileSet_update(mmu->gpu->tileSet, mmu->gpu->vram, addr, val);
             break;
             
         // External RAM

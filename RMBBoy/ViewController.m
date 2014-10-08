@@ -21,13 +21,12 @@
 
     self.gameView.contentMode = UIViewContentModeScaleAspectFit;
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"display gameboy screen" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        NSArray *pixels = note.userInfo[@"pixels"];
-        UIImage *gameImage = [self imageWithPixels:pixels];
-        self.gameView.image = gameImage;
-    }];
-    
+
     Z80_doStuff();
+   
+
+    
+    
 }
 
 -(UIImage *)imageWithPixels:(NSArray *)pixels

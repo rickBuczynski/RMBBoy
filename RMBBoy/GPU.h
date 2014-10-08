@@ -24,11 +24,14 @@ void TileSet_update(TileSet *tileSet, int *vram, int addr, int val);
 
 typedef struct GPU {
     int mode, modeClock, line;
+    int switchbg, bgmap, bgtile, switchlcd;
+    int scy, scx;
     
     Screen *screen;
     TileSet *tileSet;
 
     int *vram;
+    int *palette;
 } GPU;
 
 void GPU_reset(GPU *gpu);
@@ -36,3 +39,5 @@ void GPU_free(GPU *gpu);
 void GPU_renderScan(GPU *gpu);
 void GPU_step(GPU *gpu, int cpuCycleCount);
 
+int GPU_rb(GPU *gpu, int addr);
+void GPU_wb(GPU *gpu, int addr, int val);

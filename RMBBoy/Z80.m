@@ -89,44 +89,22 @@ void Z80_printRegisters(Z80 *z80)
 
 void Z80_run(Z80 *z80)
 {
-
-    int i = 0;
-    
-    while(i++ < 5) {
-        int op = MMU_rb(z80->mmu,z80->regs.pc,z80->regs.pc);                // Fetch instruction
+    while(1) {
+        int op = MMU_rb(z80->mmu,z80->regs.pc++,z80->regs.pc+1);        // Fetch instruction
         instrMap[op](z80);                                              // Dispatch
         z80->regs.pc &= 65535;                                          // Mask PC to 16 bits
+        
         z80->clock.m += z80->regs.m;                                    // Add time to CPU clock
         z80->clock.t += z80->regs.t;
         
-        z80->regs.pc++;
-        
-        GPU_step(z80->gpu, z80->regs.t);
+        GPU_step(z80->gpu, z80->regs.m);
     }
-    
-    Screen_display(z80->gpu->screen);
-    
-    /*
-    int val = MMU_rb(&mmu,0x0100,0x0100);                // Fetch instruction
-    while(i < 4) {
-        val = MMU_rb(&mmu,i,0x0100);                // Fetch instruction
-        NSLog(@"%c",val);
-        i++;
-    }
-     */
-    
 }
 
 void Z80_doStuff()
 {
     Z80 z80;
-    
-    //Z80_printRegisters(&z80);
-    //Z80_reset(&z80);
-    //Z80_printRegisters(&z80);
-    //Z80_ADDr_e(&z80);
-    //Z80_printRegisters(&z80);
-    
+       
     Z80_reset(&z80);
     Z80_run(&z80);
     Z80_free(&z80);

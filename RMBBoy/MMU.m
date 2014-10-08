@@ -39,7 +39,7 @@ void MMU_reset(MMU *mmu)
     mmu->eram = calloc(8192, sizeof(int));
     mmu->zram = calloc(127, sizeof(int));
     
-    mmu->rom = 0; // TODO: prob need to doe something with this
+    MMU_loadRom(mmu);
 }
 
 void MMU_free(MMU *mmu)
@@ -47,6 +47,7 @@ void MMU_free(MMU *mmu)
     free(mmu->wram);
     free(mmu->eram);
     free(mmu->zram);
+    free(mmu->rom);
 }
 
 // TODO: the whole case statment thing is really weird
@@ -120,7 +121,12 @@ int MMU_rb(MMU *mmu, int addr, int programCounter)
                     if (addr >= 0xFF80) {
                         return mmu->zram[addr & 0x7f];
                     } else {
-                        return 0; // TODO: io control handling
+                        // io control handling
+                        switch (addr & 0x00F0) {
+                            case 0x40: case 0x50: case 0x60: case 0x70:
+                                return GPU_rb(mmu->gpu, addr);
+                        }
+                        return 0;
                     }
             }
         default:
@@ -154,7 +160,7 @@ void MMU_wb(MMU *mmu, int addr, int val)
         // VRAM
         case 0x8000: case 0x9000:
             mmu->gpu->vram[addr&0x1FFF] = val;
-            TileSet_update(mmu->gpu->tileSet, mmu->gpu->vram, addr, val);
+            TileSet_update(mmu->gpu->tileSet, mmu->gpu->vram, addr&0x1FFF, val);
             break;
             
         // External RAM
@@ -185,12 +191,19 @@ void MMU_wb(MMU *mmu, int addr, int val)
                     //GPU.updateoam(addr,val); TODO
                     break;
                     
-                    // Zeropage RAM, I/O
+                // Zeropage RAM, I/O
                 case 0xF00:
-                    if(addr > 0xFF7F) { mmu->zram[addr&0x7F]=val; }
-                    else switch(addr&0xF0)
-                    {
+                    if(addr >= 0xFF80) {
+                        mmu->zram[addr&0x7F]=val;
                     }
+                    else {
+                        switch (addr & 0x00F0) {
+                            case 0x40: case 0x50: case 0x60: case 0x70:
+                                GPU_wb(mmu->gpu, addr, val);
+                                break;
+                        }
+                    }
+                    break;
             }
             break;
     }
@@ -202,10 +215,21 @@ void MMU_ww(MMU *mmu, int addr, int val)
     MMU_wb(mmu, addr+1, val>>8);
 }
 
+#include <sys/stat.h>
+
 void MMU_loadRom(MMU *mmu)
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"rom1" ofType:@"txt"];
-    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@"%@",content);
-    mmu->rom = [content cStringUsingEncoding:[NSString defaultCStringEncoding]];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"rom" ofType:@"bin"];
+    
+    NSData *myData = [NSData dataWithContentsOfFile:path];
+    NSLog(@"%@", myData);
+    
+    const char *cPath = [path cStringUsingEncoding:[NSString defaultCStringEncoding]];
+    struct stat st;
+    stat(cPath, &st);
+    unsigned long size = (unsigned long)st.st_size;
+    
+    mmu->rom = malloc(size*sizeof(unsigned char));
+    [myData getBytes:mmu->rom length:size];
 }

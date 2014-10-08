@@ -15,7 +15,7 @@ typedef struct GPURef {
 
 typedef struct MMU {
     int inBios;
-    const char *rom;
+    unsigned char *rom;
     int *wram;
     int *eram;
     int *zram;
